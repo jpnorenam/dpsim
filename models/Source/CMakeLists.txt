@@ -159,3 +159,29 @@ target_link_libraries(cps PUBLIC ${CPS_LIBRARIES})
 target_include_directories(cps PUBLIC ${CPS_INCLUDE_DIRS})
 target_sources(cps PRIVATE ${CPS_SOURCES})
 target_compile_options(cps PUBLIC ${CPS_CXX_FLAGS})
+
+include(GNUInstallDirs)
+
+install(TARGETS cps
+	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/static
+)
+
+install(
+	DIRECTORY ${PROJECT_SOURCE_DIR}/models/Include/cps/
+	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cps
+	COMPONENT devel
+	FILES_MATCHING
+		PATTERN "*.h"
+		PATTERN "*.hpp"
+)
+
+install(
+	DIRECTORY ${PROJECT_BINARY_DIR}/models/Include/cps/
+	DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cps
+	COMPONENT devel
+	FILES_MATCHING
+		PATTERN "*.h"
+		PATTERN "*.hpp"
+) 
